@@ -1,0 +1,117 @@
+
+import pygame, sys, random, pygame.font, pygame.event, pygame.draw, pygame.time, string
+from pygame.locals import *
+
+
+#FPS = 30
+#fpsClock = pygame.time.Clock()
+
+placePosition = 10
+
+def displayMap():
+    for row in range(MAPHEIGHT):
+        for column in range(MAPWIDTH):            
+            DISPLAYSURF.blit(textures[tilemap[row][column]],(column*TILESIZE,row*TILESIZE))
+
+
+
+
+def displayPlayer():
+    DISPLAYSURF.blit(PLAYER,(playerPos[0]*TILESIZE,playerPos[1]*TILESIZE))
+
+
+#kolory
+BLACK = (0,0,0)
+BROWN = (153,76,0)
+GREEN = (0,255,0)
+BLUE = (0,0,255)
+GRAY = (192,192,192)
+WHITE = (255,255,255)
+
+
+#tekstury
+WATER = 0
+GRASS = 1
+
+textures = {
+    GRASS : pygame.image.load('grass.png'),
+    WATER : pygame.image.load('water.png'),
+
+    }
+
+
+#podglad mapy z uwzglednieniem tekstur
+tilemap = [
+    [GRASS, GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS, GRASS],
+    [GRASS, GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS, GRASS],
+    [GRASS, GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS, GRASS],
+    [GRASS, GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS, GRASS],
+    [GRASS, GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS, GRASS],
+    [GRASS, GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS, GRASS],
+    [GRASS, GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS, GRASS],
+    [GRASS, GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS, GRASS],
+    [GRASS, GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS, GRASS],
+    [GRASS, GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS, GRASS],
+    [GRASS, GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS, GRASS],
+    [GRASS, GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS,  GRASS, GRASS],
+            ]
+
+#rozmiar mapy
+TILESIZE = 40
+MAPWIDTH = 20
+MAPHEIGHT = 12
+
+#obrazek i pozycja poczatkowa 
+PLAYER = pygame.image.load('player01.png')
+playerPos = [7,10]
+
+
+
+pygame.init()
+DISPLAYSURF = pygame.display.set_mode((MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE))
+
+
+#nazwa i ikona okienka
+pygame.display.set_caption('TRAKTUR')
+pygame.display.set_icon(pygame.image.load('player01.png'))
+
+INVFONT = pygame.font.Font(None,40)
+
+
+
+
+
+
+
+#petla glowna
+while True:
+    DISPLAYSURF.fill(BLACK)
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+
+
+
+
+    #wyswietlanie mapy        
+    displayMap()
+    
+    #wyswieltanie modelu smieciarki
+    displayPlayer()
+    
+    #wyswietlanie aktualnego stanu smieciarki
+    #displayInv()
+    
+    '''#chmura    
+    DISPLAYSURF.blit(textures[CLOUD].convert_alpha(),(cloudx,cloudy))
+    cloudx+=1    
+    if cloudx > MAPWIDTH*TILESIZE:
+        cloudy = random.randint(0,MAPHEIGHT*TILESIZE)
+        cloudx = -200   '''     
+    
+    pygame.display.update()
+    #fpsClock.tick(FPS)
+
+
+
